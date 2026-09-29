@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- 검색 엔진 수집 및 노출 차단 -->
     <meta name="robots" content="noindex, nofollow">
     
     <title>CareKit</title>
     <!-- Tailwind CSS CDN -->
     <script src=" https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userToken = urlParams.get('token');
+
+        const SECRET_KEY = "nhis1234!";
+
+        if (userToken !== SECRET_KEY) {
+            document.write(`
+                           <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center;">
+                            <div>
+                             <h2>접근 권한이 없습니다</h2>
+                             <p>지정된 QR코드를 통해서만 접근할 수 있는 페이지입니다.</p>
+                            </div>
+                           </div>
+            `);
+        }
+       </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased overflow-hidden">
 
