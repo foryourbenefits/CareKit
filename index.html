@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,8 @@
     
     <title>CareKit</title>
     <!-- Tailwind CSS CDN -->
-    <script src=" https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -18,25 +18,25 @@
 
         if (userToken !== SECRET_KEY) {
             document.write(`
-                           <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center;">
-                            <div>
-                             <h2>접근 권한이 없습니다</h2>
-                             <p>지정된 QR코드를 통해서만 접근할 수 있는 페이지입니다.</p>
-                            </div>
-                           </div>
+               <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center;">
+                <div>
+                 <h2>접근 권한이 없습니다</h2>
+                 <p>지정된 QR코드를 통해서만 접근할 수 있는 페이지입니다.</p>
+                </div>
+               </div>
             `);
         }
-       </script>
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased overflow-hidden">
 
     <div class="flex h-screen relative">
         
         <!-- [모바일 전용] 사이드바 열렸을 때 뒷배경 어둡게 처리 (터치 시 닫힘) -->
-        <div id="sidebar-backdrop" onclick="closeSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden transition-opacity"></div>
+        <div id="sidebar-backdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden transition-opacity"></div>
 
-        <!-- 1. 좌측 메뉴 바 (PC: 고정 노출 / 모바일: 슬라이드 드로어) -->
-        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 bg-gray-900 text-gray-300 flex flex-col border-r border-gray-800 shadow-2xl md:shadow-lg shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <!-- 1. 좌측 메뉴 바 (PC: 접기/펼치기 가능 / 모바일: 슬라이드 드로어) -->
+        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 bg-gray-900 text-gray-300 flex flex-col border-r border-gray-800 shadow-2xl md:shadow-none shrink-0 -translate-x-full md:translate-x-0 transition-all duration-300 ease-in-out">
             <!-- 로고, 타이틀 및 [모바일 전용] 닫기 버튼 -->
             <div class="p-5 border-b border-gray-800 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
@@ -46,7 +46,7 @@
                     <h1 class="text-lg font-semibold text-white tracking-tight">CareKit 케어키트</h1>
                 </div>
                 <!-- 모바일 전용 닫기(X) 버튼 -->
-                <button onclick="closeSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 focus:outline-none">
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2 focus:outline-none">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
@@ -81,10 +81,10 @@
                         <i id="institution-sub-icon" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
                     </button>
                     <div id="institution-sub" class="hidden pl-8 pr-2 py-1 space-y-1 mt-1">
-                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 양압기', ' https://www.nhis.or.kr/nhis/policy/retrievePAPStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 양압기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 산소발생기', ' https://www.nhis.or.kr/nhis/policy/retrieveHomeOxyStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 산소발생기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 인공호흡기', ' https://www.nhis.or.kr/nhis/policy/retrieveHsnhmMdtrStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 인공호흡기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 기침유발기', ' https://www.nhis.or.kr/nhis/policy/retrieveCoughAssistStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 기침유발기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 양압기', 'https://www.nhis.or.kr/nhis/policy/retrievePAPStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 양압기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 산소발생기', 'https://www.nhis.or.kr/nhis/policy/retrieveHomeOxyStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 산소발생기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 인공호흡기', 'https://www.nhis.or.kr/nhis/policy/retrieveHsnhmMdtrStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 인공호흡기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('준요양기관 조회 - 기침유발기', 'https://www.nhis.or.kr/nhis/policy/retrieveCoughAssistStoreList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 기침유발기</a>
                     </div>
                 </div>
 
@@ -98,16 +98,16 @@
                         <i id="product-sub-icon" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
                     </button>
                     <div id="product-sub" class="hidden pl-8 pr-2 py-1 space-y-1 mt-1">
-                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 양압기', ' https://www.nhis.or.kr/nhis/policy/retrievePAPPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 양압기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 산소발생기', ' https://www.nhis.or.kr/nhis/policy/retrieveHomeOxyProductList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 산소발생기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 인공호흡기', ' https://www.nhis.or.kr/nhis/policy/retrieveHsnhmMdtrPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 인공호흡기</a>
-                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 기침유발기', ' https://www.nhis.or.kr/nhis/policy/retrieveCoughAssistPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 기침유발기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 양압기', 'https://www.nhis.or.kr/nhis/policy/retrievePAPPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 양압기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 산소발생기', 'https://www.nhis.or.kr/nhis/policy/retrieveHomeOxyProductList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 산소발생기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 인공호흡기', 'https://www.nhis.or.kr/nhis/policy/retrieveHsnhmMdtrPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 인공호흡기</a>
+                        <a href="javascript:void(0)" onclick="loadUrl('등록제품 조회 - 기침유발기', 'https://www.nhis.or.kr/nhis/policy/retrieveCoughAssistPrdList.do')" class="block p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">- 기침유발기</a>
                     </div>
                 </div>
 
                 <!-- 4. [보건복지부 고시] -->
                 <div class="menu-group">
-                    <button onclick="loadUrl('보건복지부 고시', ' https://www.nhis.or.kr/lm/lmxsrv/law/lawFullView.do?SEQ=83&SEQ_HISTORY=613565')" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-800 transition-colors text-left font-medium text-white">
+                    <button onclick="loadUrl('보건복지부 고시', 'https://www.nhis.or.kr/lm/lmxsrv/law/lawFullView.do?SEQ=83&SEQ_HISTORY=613565')" class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-800 transition-colors text-left font-medium text-white">
                         <span class="flex items-center space-x-3">
                             <i class="fa-solid fa-scale-balanced text-purple-400 w-5"></i>
                             <span>보건복지부 고시</span>
@@ -119,18 +119,19 @@
             </nav>
 
             <div class="p-4 border-t border-gray-800 flex items-center justify-center">
-                <div class="flex itmes-center">
-                <img src="ci_seoulgangwon_1.png" alt=CI class="h-8 max-w-[160px] object-contain">
+                <div class="flex items-center">
+                    <img src="ci_seoulgangwon_1.png" alt="CI" class="h-8 max-w-[160px] object-contain">
+                </div>
             </div>
         </aside>
 
         <!-- 2. 우측 메인 콘텐츠 영역 -->
         <main class="flex-1 flex flex-col overflow-hidden bg-gray-100 min-w-0">
-            <!-- 상단 헤더 (모바일 햄버거 버튼 포함) -->
+            <!-- 상단 헤더 (모바일/PC 공용 햄버거 토글 버튼) -->
             <header class="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex justify-between items-center shadow-xs shrink-0">
                 <div class="flex items-center space-x-3 truncate">
-                    <!-- [모바일 전용] 햄버거 메뉴 열기 버튼 -->
-                    <button onclick="openSidebar()" class="md:hidden text-gray-700 hover:text-gray-900 p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 focus:outline-none">
+                    <!-- 제미나이 스타일 햄버거 토글 버튼 (PC 및 모바일 공용) -->
+                    <button onclick="toggleSidebar()" class="text-gray-700 hover:text-gray-900 p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 focus:outline-none" title="사이드바 토글">
                         <i class="fa-solid fa-bars text-base"></i>
                     </button>
                     <div class="truncate">
@@ -152,12 +153,11 @@
                 <!-- 1) 기본 안내 화면 -->
                 <div id="view-placeholder" class="w-full h-full bg-white border border-gray-200 rounded-xl flex flex-col justify-center items-center text-center p-6">
                     <div class="mb-4">
-                        <img src="character.png" alt=캐릭터 class="w-34 h-38 sm:h-28 object-contain mxauto drop-shadow-sm transition-transform hover:scale-105 duration-300">
+                        <img src="character.png" alt="캐릭터" class="w-34 h-38 sm:h-28 object-contain mx-auto drop-shadow-sm transition-transform hover:scale-105 duration-300">
                     </div>
                     <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-1">임대기기 치료서비스 제공 준요양기관 점검을 시작해 볼까요</h3>
                     <p class="text-gray-500 max-w-sm text-xs sm:text-sm">
-                        <span class="md:hidden">상단의 <strong>메뉴(☰) 버튼</strong>을 눌러</br> 점검표, 기관·제품 정보, 고시를 확인하세요.</span>
-                        <span class="hidden md:inline">좌측 메뉴에서 점검표, 기관·제품 정보, 고시를 확인하세요.</span>
+                        상단의 <strong>메뉴(☰) 버튼</strong>을 눌러 점검표, 기관·제품 정보, 고시를 확인하세요.
                     </p>
                 </div>
 
@@ -172,24 +172,34 @@
 
     <!-- 반응형 스크립트 -->
     <script>
-        // 사이드바 엘리먼트 제어
         const sidebar = document.getElementById('sidebar');
         const backdrop = document.getElementById('sidebar-backdrop');
 
-        function openSidebar() {
-            sidebar.classList.remove('-translate-x-full');
-            backdrop.classList.remove('hidden');
+        // 제미나이 스타일 접기/펼치기 통합 함수
+        function toggleSidebar() {
+            if (window.innerWidth >= 768) {
+                // [PC 환경] 메뉴바 너비를 0으로 줄여 매끄럽게 숨기거나 다시 복원
+                sidebar.classList.toggle('md:w-0');
+                sidebar.classList.toggle('md:w-72');
+                sidebar.classList.toggle('overflow-hidden');
+            } else {
+                // [모바일 환경] 화면 좌측에서 슬라이드 출현 및 배경 오버레이
+                const isClosed = sidebar.classList.contains('-translate-x-full');
+                if (isClosed) {
+                    sidebar.classList.remove('-translate-x-full');
+                    backdrop.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                }
+            }
         }
 
-        function closeSidebar() {
-            sidebar.classList.add('-translate-x-full');
-            backdrop.classList.add('hidden');
-        }
-
-        // 모바일 화면일 경우 메뉴 선택 후 사이드바 닫기
+        // 모바일 화면일 경우 서식 선택 후 사이드바 닫기
         function checkMobileAutoClose() {
             if (window.innerWidth < 768) {
-                closeSidebar();
+                sidebar.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
             }
         }
 
@@ -242,4 +252,4 @@
         }
     </script>
 </body>
-</html
+</html>
