@@ -32,13 +32,12 @@
 
     <div class="flex h-screen relative w-full overflow-hidden">
         
-        <!-- [모바일 전용] 배경 어둡게 처리 -->
+        <!-- [모바일 전용] 사이드바 열렸을 때 뒷배경 어둡게 처리 (터치 시 닫힘) -->
         <div id="sidebar-backdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden transition-opacity"></div>
 
-        <!-- 1. 좌측 사이드바 (PC: 접기 지원 / 모바일: 슬라이드 드로어) -->
-        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 bg-gray-900 text-gray-300 flex flex-col border-r border-gray-800 shadow-2xl md:shadow-none shrink-0 -translate-x-full md:translate-x-0 transition-[margin,transform] duration-300 ease-in-out">
-            
-            <!-- 사이드바 상단 헤더 (로고 및 PC/모바일 사이드바 접기 버튼) -->
+        <!-- 1. 좌측 메뉴 바 (PC: 토글 가능 / 모바일: 슬라이드 드로어) -->
+        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 bg-gray-900 text-gray-300 flex flex-col border-r border-gray-800 shadow-2xl md:shadow-none -translate-x-full md:translate-x-0">
+            <!-- 로고, 타이틀 및 [사이드바 닫기/접기] 버튼 -->
             <div class="p-4 border-b border-gray-800 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="bg-blue-600 text-white p-2 rounded-lg">
@@ -46,7 +45,7 @@
                     </div>
                     <span class="text-base font-semibold text-white tracking-tight">CareKit 케어키트</span>
                 </div>
-                <!-- 사이드바 닫기/접기 버튼 (제미나이처럼 사이드바 안쪽에서 접기) -->
+                <!-- 사이드바 상단 닫기/접기 버튼 (PC 및 모바일 공용) -->
                 <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-gray-800 focus:outline-none" title="사이드바 접기">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
@@ -131,8 +130,8 @@
             <!-- 상단 헤더 -->
             <header class="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex justify-between items-center shadow-xs shrink-0">
                 <div class="flex items-center space-x-3 truncate">
-                    <!-- 사이드바 열기 토글 버튼 (PC에서 메뉴가 접혔을 때 다시 꺼내는 버튼 / 모바일 공용) -->
-                    <button id="main-toggle-btn" onclick="toggleSidebar()" class="text-gray-700 hover:text-gray-900 p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 focus:outline-none" title="메뉴 열기">
+                    <!-- 사이드바가 닫혔을 때만 나타나는 햄버거 버튼 (md:hidden 기본 적용) -->
+                    <button id="main-toggle-btn" onclick="toggleSidebar()" class="md:hidden text-gray-700 hover:text-gray-900 p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 focus:outline-none" title="메뉴 열기">
                         <i class="fa-solid fa-bars text-base"></i>
                     </button>
                     <div class="truncate">
@@ -177,21 +176,17 @@
         const backdrop = document.getElementById('sidebar-backdrop');
         const mainToggleBtn = document.getElementById('main-toggle-btn');
 
-        // 사이드바 상태 변수 (기본적으로 PC는 열림 상태)
-        let isPcSidebarOpen = true;
-
-        // 제미나이 방식 사이드바 토글
+        // 사이드바 토글 함수
         function toggleSidebar() {
             if (window.innerWidth >= 768) {
-                // [PC 모드]: 음수 마진(-ml-72)을 주어 왼쪽으로 완전히 숨김
-                isPcSidebarOpen = !isPcSidebarOpen;
-                if (!isPcSidebarOpen) {
-                    sidebar.style.marginLeft = '-18rem'; // -w-72 (288px)
-                } else {
-                    sidebar.style.marginLeft = '0px';
-                }
+                // [PC 환경]
+                // 1. 사이드바 숨김/표시 전환
+                sidebar.classList.toggle('md:hidden');
+                
+                // 2. 사이드바가 닫히면 헤더의 햄버거 버튼을 띄우고, 열리면 헤더 버튼을 숨김
+                mainToggleBtn.classList.toggle('md:hidden');
             } else {
-                // [모바일 모드]: translate-x 및 뒷배경 오버레이 제어
+                // [모바일 환경]
                 const isClosed = sidebar.classList.contains('-translate-x-full');
                 if (isClosed) {
                     sidebar.classList.remove('-translate-x-full');
@@ -203,7 +198,7 @@
             }
         }
 
-        // 모바일 화면일 경우 서식 선택 후 사이드바 자동 닫기
+        // 모바일 화면일 경우 서식 선택 후 사이드바 닫기
         function checkMobileAutoClose() {
             if (window.innerWidth < 768) {
                 sidebar.classList.add('-translate-x-full');
