@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>양압기 치료 서비스 제공업소 점검표</title>
+    <title>기침유발기 치료 서비스 제공업소 점검표</title>
     <style>
         :root {
             --navy: #1f2a44;
@@ -39,7 +39,7 @@
             box-shadow: 0 10px 30px rgba(31, 42, 68, 0.09), 0 2px 6px rgba(31, 42, 68, 0.06);
         }
 
-        /* ===== 상단 스티키(Sticky) 툴바 ===== */
+        /* ===== 우측 상단 가로형 스티키 툴바 (아이콘 전용) ===== */
         .sticky-toolbar-wrap {
             position: sticky;
             top: 10px;
@@ -49,8 +49,8 @@
             display: flex;
             justify-content: flex-end;
         }
-        .toolbar {
-            display: flex;
+        .icon-toolbar {
+            display: inline-flex;
             flex-direction: row;
             gap: 8px;
             background: rgba(255, 255, 255, 0.95);
@@ -60,33 +60,27 @@
             border: 1px solid #d7dae0;
             box-shadow: 0 4px 14px rgba(31, 42, 68, 0.12);
         }
-        .tbtn {
+        .icon-btn {
             border: 1px solid #d7dae0;
-            background: #f8fafc;
-            color: #3a3f47;
-            padding: 6px 14px;
-            font-size: 12.5px;
-            font-weight: 600;
-            border-radius: 999px;
+            background: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             cursor: pointer;
-            letter-spacing: 0.2px;
-            transition: all 0.12s ease;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 0;
         }
-        .tbtn:hover { background: #eef2f6; transform: translateY(-1px); }
-        .tbtn:active { transform: translateY(0); }
-        .tbtn-pdf {
-            background: #f8fafc;
-            color: #3a3f47;
-            border-color: #d7dae0;
+        .icon-btn:hover {
+            transform: scale(1.1);
+            background: #f1f4f9;
         }
-        .tbtn-pdf:hover {
-            background: #19724b;
-            color: #fff;
-        }
-        .tbtn .emoji {
-            margin-right: 4px;
+        .icon-btn:active {
+            transform: scale(0.95);
         }
 
         /* ===== 메인 테이블 레이아웃 ===== */
@@ -329,13 +323,13 @@
 </head>
 <body>
 
-<!-- 상단 스티키 툴바 (서식을 가리지 않고 상단에 슬림하게 위치) -->
+<!-- 우측 상단 가로형 고정 툴바 (아이콘 전용 버튼 4개) -->
 <div class="sticky-toolbar-wrap">
-    <div class="toolbar">
-        <button class="tbtn" onclick="handleSave()"><span class="emoji">💾</span></button>
-        <button class="tbtn" onclick="handleLoadRequest()"><span class="emoji">📂</span></button>
-        <button class="tbtn" onclick="handleResetRequest()"><span class="emoji">🗑️</span></button>
-        <button class="tbtn tbtn-pdf" onclick="window.print()"><span class="emoji">🖨</span></button>
+    <div class="icon-toolbar">
+        <button class="icon-btn" onclick="handleSave()" title="임시저장">💾</button>
+        <button class="icon-btn" onclick="handleLoadRequest()" title="불러오기">📂</button>
+        <button class="icon-btn" onclick="handleResetRequest()" title="초기화">🗑️</button>
+        <button class="icon-btn" onclick="window.print()" title="PDF 저장/인쇄">🖨️</button>
     </div>
 </div>
 
@@ -345,7 +339,7 @@
             <tbody>
                 <tr>
                     <td colspan="4" style="font-size: 18px; font-weight: bold; border: none; padding-left: 0; padding-bottom: 8px;">
-                        □ 양압기 치료 서비스 제공업소 점검표
+                        □ 기침유발기 치료 서비스 제공업소 점검표
                     </td>
                 </tr>
                 <tr>
@@ -430,12 +424,12 @@
                     <table class="inner-table">
                         <tbody>
                             <tr>
-                                <th style="width: 20%;">지역</th>
-                                <th style="width: 80%;">주소</th>
+                                <th style="width: 10%;">지역</th>
+                                <th style="width: 90%;">주소</th>
                             </tr>
                             <tr>
                                 <td><input type="text" placeholder="원주" class="text-center"></td>
-                                <td><input type="text" placeholder="강원도 원주시 건강로 32"></td>
+                                <td><input type="text" placeholder="강원도 원주시 건강로 25, 000호"></td>
                             </tr>
                             <tr>
                                 <td><input type="text" class="text-center"></td>
@@ -492,15 +486,15 @@
             </tr>
 
             <tr>
-                <td rowspan="16" class="text-center" style="font-weight:bold; background-color:#fafafa;">기기사항</td>
+                <td rowspan="15" class="text-center" style="font-weight:bold; background-color:#fafafa;">기기사항</td>
                 <td rowspan="6">④ 기기 확인</td>
                 <td rowspan="6">등록된 기기의 모델명, 제조년월 등 확인</td>
                 <td style="padding: 3px;" colspan="2">
-                    전산의 제품목록 중 대여가능 기기 확인<br>(지속형·자동형·이중형 각 최소 1대, 한 가지만 있을 경우 최소 2대)
+                    전산의 제품목록 중 대여가능 기기 확인(최소 2대)
                     <table class="inner-table" style="border:none;">
                         <tbody>
                             <tr>
-                                <td style="width: 70px; font-weight: bold; background-color: #f9f9f9;" class="text-center">기기 1 코드</td>
+                                <td style="width: 60px; font-weight: bold; background-color: #f9f9f9;" class="text-center">기기 1 코드</td>
                                 <td><input type="text" placeholder="첫 번째 기기 코드 입력"></td>
                             </tr>
                             <tr>
@@ -606,13 +600,13 @@
             </tr>
             
             <tr>
-                <td rowspan="2">⑤ 기능 확인</td>
-                <td>알람 기능 작동 확인</td>
+                <td>⑤ 기기 기능 확인</td>
+                <td>경보 기능 작동 확인</td>
                 <td style="padding: 0;">
                     <table class="compact-inner-table">
                         <thead>
                             <tr style="background-color: #f7f7f7;">
-                                <th rowspan="2" style="border-left: none; border-top: none; width: 25%;">알람기능</th>
+                                <th rowspan="2" style="border-left: none; border-top: none; width: 25%;">경보기능</th>
                                 <th colspan="2" style="border-top: none;">기기1</th>
                                 <th colspan="2" style="border-top: none;">기기2</th>
                                 <th colspan="2" style="border-top: none;">기기3</th>
@@ -629,7 +623,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">마스크 누출</td>
+                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">압력</td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
@@ -637,7 +631,7 @@
                                 <td><input type="checkbox" class="ox-input"></td><td style="border-right: none;"><input type="checkbox" class="ox-input"></td>
                             </tr>
                             <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">튜브 분리·막힘</td>
+                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">과열</td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
@@ -645,7 +639,7 @@
                                 <td><input type="checkbox" class="ox-input"></td><td style="border-right: none;"><input type="checkbox" class="ox-input"></td>
                             </tr>
                             <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">SD메모리카드</td>
+                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">전원</td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
@@ -653,7 +647,7 @@
                                 <td><input type="checkbox" class="ox-input"></td><td style="border-right: none;"><input type="checkbox" class="ox-input"></td>
                             </tr>
                             <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">시스템 오류</td>
+                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">부품</td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
                                 <td><input type="checkbox" class="ox-input"></td><td><input type="checkbox" class="ox-input"></td>
@@ -677,51 +671,10 @@
                         <label class="radio-label"><input type="radio" name="g5_1_main"> 적정</label>
                     </div>
                 </td>
-                <td rowspan="2">
-                    <canvas id="sig_row5_1" class="sig-canvas-row" style="height: 80px;"></canvas>
+                <td>
+                    <canvas id="sig_row5_1" class="sig-canvas-row"></canvas>
                     <button class="btn-clear-sm" onclick="clearCanvas('sig_row5_1')">지우기</button>               
                     <textarea style="margin-top:2px;" placeholder="특이사항"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>기기 사용이력 확인기능 보유 확인</td>
-                <td style="padding: 0;">
-                    <table class="compact-inner-table">
-                        <thead>
-                            <tr style="background-color: #f7f7f7;">
-                                <th style="border-left: none; border-top: none; width: 25%;">이력확인기능</th>
-                                <th style="border-top: none; width: 15%;">기기 1</th>
-                                <th style="border-top: none; width: 15%;">기기 2</th>
-                                <th style="border-top: none; width: 15%;">기기 3</th>
-                                <th style="border-top: none; width: 15%;">기기 4</th>
-                                <th style="border-right: none; border-top: none; width: 15%;">기기 5</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">SD카드/APP</td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td style="border-right: none;"><input type="checkbox" class="ox-input"></td>
-                            </tr>
-                            <tr>
-                                <td style="border-left: none; border-bottom: none; font-weight: bold; background-color:#fafafa; text-align: left;">API지수 확인</td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td><input type="checkbox" class="ox-input"></td>
-                                <td style="border-right: none; border-bottom: none;"><input type="checkbox" class="ox-input"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td>
-                    <div class="radio-group">
-                        <label class="radio-label"><input type="radio" name="g5_2_main"> 미흡</label>
-                        <label class="radio-label"><input type="radio" name="g5_2_main"> 적정</label>
-                    </div>
                 </td>
             </tr>
             
@@ -732,8 +685,7 @@
                     ① 성능검사 보유장비 확인<br>
                     계측기 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
                     누설전류계측기 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
-                    교정장치[ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
-                    온도측정기 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]
+                    교정장치 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]
                 </td>
                 <td>
                     <div class="radio-group">
@@ -766,7 +718,7 @@
             <tr>
                 <td style="padding: 5px; line-height: 1.4;">
                     ③ 위생처리 확인<br>
-                    ❶ 업체 담당자가 양압기 개방 후 기기내부 먼지상태 확인[ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br> 
+                    ❶ 업체 담당자가 기침유발기 개방 후 기기내부 먼지상태 확인[ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br> 
                     ❷ 흡입구 부분 먼지상태 확인 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ] <span style="color:#666;">※위탁업체는 ❷만 실시</span>
                 </td>
                 <td>
@@ -800,7 +752,7 @@
             <tr>
                 <td>⑦ 소모품 및 부속품 구비</td>
                 <td>기기에 들어가는 소모품 및 부속품 구비</td>
-                <td>소모품(마스크, 튜브, 필터 등) 부속품 확인</td>
+                <td>소모품(마스크, 튜브등) 부속품 확인</td>
                 <td>
                     <div class="radio-group">
                         <label class="radio-label"><input type="radio" name="g7"> 미흡</label>
@@ -809,7 +761,7 @@
                 </td>
                 <td>
                     <canvas id="sig_row7" class="sig-canvas-row"></canvas>
-                    <button class="btn-clear-sm" onclick="clearCanvas('sig_row7')">지우기</button>               
+                    <button class="btn-clear-sm" onclick="clearCanvas('sig_row7')">지우기</button>                  
                     <textarea style="margin-top:2px;" placeholder="특이사항"></textarea>
                 </td>
             </tr>
@@ -858,9 +810,9 @@
             </tr>
 
             <tr>
-                <td rowspan="15" class="text-center" style="font-weight:bold; background-color:#fafafa;">서비스 현황</td>
-                <td rowspan="4">⑨ 환자관리카드 등 기기 점검 및 사용상태 기록 관리</td>
-                <td rowspan="4">정기적 기기 점검 및 기록문서 작성·관리</td>
+                <td rowspan="14" class="text-center" style="font-weight:bold; background-color:#fafafa;">서비스 현황</td>
+                <td rowspan="3">⑨ 환자관리카드 등 기기 점검 및 사용상태 기록 관리</td>
+                <td rowspan="3">정기적 기기 점검 및 기록문서 작성·관리</td>
                 <td>① 환자관리카드 등 기기점검 기록문서 구비 확인</td>
                 <td>
                     <div class="radio-group">
@@ -875,7 +827,7 @@
                 </td>
             </tr>
             <tr>
-                <td>② 정기방문 기간(6개월)의 적정성 확인</td>
+                <td>② 정기방문 기간(1개월)의 적정성 확인</td>
                 <td>
                     <div class="radio-group">
                         <label class="radio-label"><input type="radio" name="g9_2"> 미흡</label>
@@ -892,8 +844,11 @@
                 <td style="line-height: 1.6; padding: 6px 8px;">
                     ③ 방문 점검 항목 기재여부 확인<br>
                     소독 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
-                    교체 소모품 명 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
-                    점검 결과 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
+                    흡기·호기 압력 설정 값 유지 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
+                    기기사용이력확인 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
+                    경보기능 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
+                    교체소모품명 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
+                    점검결과 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
                     점검자·수진자확인 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
                     대여기기 점검표 비치여부 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]
                 </td>
@@ -909,25 +864,7 @@
                     <textarea style="margin-top:2px;" placeholder="특이사항"></textarea>
                 </td>
             </tr>
-            <tr>
-                <td style="line-height: 1.6; padding: 6px 8px;">
-                    ④ 방문/유선 확인 항목 기재여부 확인<br>
-                    기기사용이력(압력값·시간·상태)확인 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]<br>
-                    알람기능 [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]
-                </td>
-                <td>
-                    <div class="radio-group">
-                        <label class="radio-label"><input type="radio" name="g9_4"> 미흡</label>
-                        <label class="radio-label"><input type="radio" name="g9_4"> 적정</label>
-                    </div>
-                </td>
-                <td>
-                    <canvas id="sig_row9_4" class="sig-canvas-row"></canvas>
-                    <button class="btn-clear-sm" onclick="clearCanvas('sig_row9_4')">지우기</button>               
-                    <textarea style="margin-top:2px;" placeholder="특이사항"></textarea>
-                </td>
-            </tr>
-            
+             
             <tr>
                 <td rowspan="2">⑩ 기기소재 및 이력관리</td>
                 <td rowspan="2">기기소재 및 수리이력 등 기록관리 확인</td>
@@ -971,7 +908,7 @@
                                 <td style="border-right: none;">[ <input type="checkbox" class="compact-underline" style="width:25px;"> ]</td>
                             </tr>
                             <tr>
-                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">부속소모품 교환현황</td>
+                                <td style="border-left: none; font-weight: bold; background-color:#fafafa; text-align: left;">기기이력 사용자 고지</td>
                                 <td> [ <input type="checkbox" class="compact-underline" style="width:25px;"> ]</td>
                                 <td style="border-right: none;">[ <input type="checkbox" class="compact-underline" style="width:25px;"> ]</td>
                             </tr>
@@ -1035,8 +972,8 @@
 
             <tr>
                 <td>⑫ 콜센터 운영</td>
-                <td>콜센터 운영 여부(자동응답시스템 불인정)<br>콜센터: <input type="text" style="width:80px;"></td>
-                <td> 콜센터 운영<br>
+                <td>24시간 콜센터 운영 여부(자동응답시스템 불인정)<br>콜센터: <input type="text" style="width:80px;"></td>
+                <td>24시간 콜센터 운영<br>
                 ① 점검 중 콜센터 운영[ <input type="text" style="width:80px; border:none; border-bottom:1px solid #333;"> ]<br>
                 ② 점검 전·후 콜센터 통화[ <input type="text" style="width:80px; border:none; border-bottom:1px solid #333;"> ]<br>
                     ※ 휴대전화 등 착신 시 인정가능(기계음은 인정 불가)
@@ -1243,7 +1180,7 @@
     }
 
     /* ===== 임시저장 / 불러오기 / 초기화 / 모달 처리 ===== */
-    const STORAGE_KEY = 'cpap_checklist_v1';
+    const STORAGE_KEY = 'cough_checklist_v1';
 
     function openModal(id) {
         const el = document.getElementById(id);
