@@ -27,7 +27,7 @@
         body {
             background: linear-gradient(180deg, #e9edf5 0%, #eef1f6 100%);
             margin: 0;
-            padding: 24px 15px 60px;
+            padding: 15px 15px 60px;
             color: var(--text);
         }
         .container {
@@ -39,48 +39,48 @@
             box-shadow: 0 10px 30px rgba(31, 42, 68, 0.09), 0 2px 6px rgba(31, 42, 68, 0.06);
         }
 
-        /* ===== 상단 툴바 ===== */
-        .toolbar-wrap {
+        /* ===== 우측 상단 가로형 스티키 툴바 (아이콘 전용) ===== */
+        .sticky-toolbar-wrap {
+            position: sticky;
+            top: 10px;
+            z-index: 50;
             max-width: 1400px;
-            margin: 0 auto 18px;
+            margin: 0 auto 12px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
         }
-        .toolbar {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: var(--card);
-            padding: 10px 10px;
-            border-radius: 14px;
-            box-shadow: 0 6px 18px rgba(31, 42, 68, 0.10);
-        }
-        .tbtn {
-            border: none;
-            padding: 10px 20px;
-            font-size: 13.5px;
-            font-weight: 600;
+        .icon-toolbar {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            padding: 6px 12px;
             border-radius: 999px;
-            cursor: pointer;
-            color: #fff;
-            letter-spacing: 0.2px;
-            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-        .tbtn:hover { transform: translateY(-1px); opacity: 0.94; }
-        .tbtn:active { transform: translateY(0); }
-        .tbtn-save, .tbtn-load, .tbtn-reset, .tbtn-pdf {
-            background: #eceef1;
-            color: #3a3f47;
             border: 1px solid #d7dae0;
+            box-shadow: 0 4px 14px rgba(31, 42, 68, 0.12);
         }
-        .tbtn .emoji {
-            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Segoe UI Symbol', 'Twemoji Mozilla', sans-serif;
-            font-style: normal;
-            font-variant-emoji: emoji;
-            color: initial;
-            -webkit-text-fill-color: initial;
-            margin-right: 2px;
+        .icon-btn {
+            border: 1px solid #d7dae0;
+            background: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 0;
+        }
+        .icon-btn:hover {
+            transform: scale(1.1);
+            background: #f1f4f9;
+        }
+        .icon-btn:active {
+            transform: scale(0.95);
         }
 
         /* ===== 메인 테이블 레이아웃 ===== */
@@ -323,6 +323,16 @@
 </head>
 <body>
 
+<!-- 우측 상단 가로형 고정 툴바 (아이콘 전용 버튼 4개) -->
+<div class="sticky-toolbar-wrap">
+    <div class="icon-toolbar">
+        <button class="icon-btn" onclick="handleSave()" title="임시저장">💾</button>
+        <button class="icon-btn" onclick="handleLoadRequest()" title="불러오기">📂</button>
+        <button class="icon-btn" onclick="handleResetRequest()" title="초기화">🗑️</button>
+        <button class="icon-btn" onclick="window.print()" title="PDF 저장/인쇄">🖨️</button>
+    </div>
+</div>
+
 <div class="container">
     <div style="display: flex; gap: 20px; margin-bottom: 30px;">
         <table class="top-layout-table" style="width: 53%;">
@@ -419,7 +429,7 @@
                             </tr>
                             <tr>
                                 <td><input type="text" placeholder="원주" class="text-center"></td>
-                                <td><input type="text" placeholder="강원도 원주시 건강로 25, 000호"></td>
+                                <td><input type="text" placeholder="강원도 원주시 건강로 32"></td>
                             </tr>
                             <tr>
                                 <td><input type="text" class="text-center"></td>
@@ -1058,15 +1068,6 @@
             </tr>
         </tbody>
     </table>
-</div>
-
-<div style="position: fixed; top: 25px; right: 25px; display: flex; flex-direction: column; gap: 2px; z-index: 9999;">
-    <div class="toolbar">
-        <button class="tbtn tbtn-save" onclick="handleSave()"><span class="emoji">💾</span></button>
-        <button class="tbtn tbtn-load" onclick="handleLoadRequest()"><span class="emoji">📂</span></button>
-        <button class="tbtn tbtn-reset" onclick="handleResetRequest()"><span class="emoji">🗑️</span></button>
-        <button class="tbtn tbtn-pdf" onclick="window.print()"><span class="emoji">🖨</span></button>
-    </div>
 </div>
 
 <script>
