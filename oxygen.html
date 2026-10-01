@@ -27,11 +27,11 @@
         body {
             background: linear-gradient(180deg, #e9edf5 0%, #eef1f6 100%);
             margin: 0;
-            padding: 24px 15px 60px;
+            padding: 15px 15px 60px;
             color: var(--text);
         }
         .container {
-            max-width: 1350px;
+            max-width: 1400px;
             margin: 0 auto;
             background: var(--card);
             padding: 30px 32px;
@@ -39,35 +39,40 @@
             box-shadow: 0 10px 30px rgba(31, 42, 68, 0.09), 0 2px 6px rgba(31, 42, 68, 0.06);
         }
 
-        /* ===== 우측 슬림 아이콘 전용 플로팅 툴바 ===== */
-        .floating-icon-toolbar {
-            position: fixed;
-            top: 40px;
-            right: 18px;
+        /* ===== 우측 상단 가로형 스티키 툴바 (아이콘 전용) ===== */
+        .sticky-toolbar-wrap {
+            position: sticky;
+            top: 10px;
+            z-index: 50;
+            max-width: 1400px;
+            margin: 0 auto 12px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 9999;
+            justify-content: flex-end;
+        }
+        .icon-toolbar {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(6px);
-            padding: 8px 6px;
-            border-radius: 30px;
+            padding: 6px 12px;
+            border-radius: 999px;
             border: 1px solid #d7dae0;
-            box-shadow: 0 4px 16px rgba(31, 42, 68, 0.15);
+            box-shadow: 0 4px 14px rgba(31, 42, 68, 0.12);
         }
         .icon-btn {
             border: 1px solid #d7dae0;
             background: #ffffff;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+            font-size: 16px;
             transition: all 0.15s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
             padding: 0;
         }
         .icon-btn:hover {
@@ -318,12 +323,14 @@
 </head>
 <body>
 
-<!-- 우측 컴팩트 원형 아이콘 툴바 (모든 버튼 동일 스타일 적용) -->
-<div class="floating-icon-toolbar">
-    <button class="icon-btn" onclick="handleSave()" title="임시저장">💾</button>
-    <button class="icon-btn" onclick="handleLoadRequest()" title="불러오기">📂</button>
-    <button class="icon-btn" onclick="handleResetRequest()" title="초기화">🗑️</button>
-    <button class="icon-btn" onclick="window.print()" title="PDF 저장/인쇄">🖨️</button>
+<!-- 우측 상단 가로형 고정 툴바 (아이콘 전용 버튼 4개) -->
+<div class="sticky-toolbar-wrap">
+    <div class="icon-toolbar">
+        <button class="icon-btn" onclick="handleSave()" title="임시저장">💾</button>
+        <button class="icon-btn" onclick="handleLoadRequest()" title="불러오기">📂</button>
+        <button class="icon-btn" onclick="handleResetRequest()" title="초기화">🗑️️</button>
+        <button class="icon-btn" onclick="window.print()" title="PDF 저장/인쇄">🖨️</button>
+    </div>
 </div>
 
 <div class="container">
